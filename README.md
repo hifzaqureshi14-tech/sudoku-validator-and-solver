@@ -1,5 +1,115 @@
-In this project, We collaborated to develop a program that verifies whether a 9×9 Sudoku board is valid. The program ensures that no number from 1 to 9 is repeated within any row, column, or 3×3 subgrid, strictly following the rules of Sudoku. After implementing the validation logic, we extended the project by building a solver that can complete a partially filled board using a systematic approach.
-As students without much experience in game development or animation, we chose to focus on strengthening our core programming skills and working within the scope of our existing knowledge. However, throughout the process, we were introduced to several new concepts such as backtracking algorithms, problem decomposition, recursion, and basic gam
-Our project does not represent a complete game with a graphical interface, but it successfully implements the most essential component of Sudoku game development: the underlying logic. We structured our code using two main functions—one for validation and the other for solving.
-The validation function works in multiple steps. First, it checks each row to ensure there are no repeated digits; if any duplicates are found, the function immediately returns false. Next, for column validation, we iterate through each column, storing its elements in a list. We then compare the length of this list with the length of the same list converted into a set—if both lengths are equal, it confirms that all elements are unique; otherwise, the column is invalid. Finally, for the 3×3 subgrids, we used nested loops to traverse each box, carefully collecting and checking elements to ensure no repetition occurs within any grid.
-To demonstrate the accuracy and reliability of our code, we also included an example Sudoku board as a test case. This allowed us to verify that our validator correctly identifies valid and invalid boards, and that our solver produces correct solutions for incomplete puzzles
+# Sudoku Solver and Validator in Python
+
+## Overview
+
+This project implements a basic Sudoku validator and solver using Python. It is designed to demonstrate how a classic constraint-based problem can be handled programmatically with simple logic and recursion. The program first verifies whether a given Sudoku grid is valid, and then attempts to solve it using a backtracking strategy.
+
+---
+
+## Approach
+
+### Validation Logic (`checkboard`)
+
+The validation function checks whether the current state of the board follows Sudoku rules. It performs three independent checks:
+
+* **Row check:** Ensures that each row contains unique values (excluding empty cells).
+* **Column check:** Ensures that each column contains unique values.
+* **Subgrid check:** Verifies each 3×3 box for duplicate values.
+
+Empty cells are represented by `"."` and are ignored during these checks.
+
+---
+
+### Solving Strategy (`solver`)
+
+The solver uses a recursive backtracking technique:
+
+* It scans the grid to locate an empty cell.
+* For that cell, it tries values from 1 to 9.
+* After placing a value, the board is validated.
+* If valid, the solver proceeds recursively to fill the next cell.
+* If a conflict occurs later, the algorithm reverts the change (backtracks) and tries the next value.
+
+This process continues until the grid is completely filled or no valid configuration can be found.
+
+---
+
+## Code Layout
+
+```id="c1a9ks"
+checkboard(board)   # Handles validation of the Sudoku grid
+solver(board)       # Applies backtracking to solve the puzzle
+main block          # Initializes the board and runs validation + solver
+```
+
+---
+
+## Sample Input
+
+The following board is used as an example:
+
+```id="y7n2qp"
+5 3 . | . 7 . | . . .
+6 . . | 1 9 5 | . . .
+. 9 8 | . . . | . 6 .
+------+-------+------
+8 . . | . 6 . | . . 3
+4 . . | 8 . 3 | . . 1
+7 . . | . 2 . | . . 6
+------+-------+------
+. 6 . | . . . | 2 8 .
+. . . | 4 1 9 | . . 5
+. . . | . 8 . | . 7 9
+```
+
+---
+
+## Output
+
+When executed, the program first validates the board:
+
+```id="p0r5xt"
+BOARD IS VALID
+```
+
+It then prints a completed Sudoku grid:
+
+```id="k3lm9v"
+['5', '3', '4', '6', '7', '8', '9', '1', '2']
+['6', '7', '2', '1', '9', '5', '3', '4', '8']
+['1', '9', '8', '3', '4', '2', '5', '6', '7']
+['8', '5', '9', '7', '6', '1', '4', '2', '3']
+['4', '2', '6', '8', '5', '3', '7', '9', '1']
+['7', '1', '3', '9', '2', '4', '8', '5', '6']
+['9', '6', '1', '5', '3', '7', '2', '8', '4']
+['2', '8', '7', '4', '1', '9', '6', '3', '5']
+['3', '4', '5', '2', '8', '6', '1', '7', '9']
+```
+
+---
+
+## Limitations
+
+* The implementation runs entirely in the terminal; no graphical interface is provided.
+* Performance may degrade for harder puzzles due to the lack of optimization techniques.
+* The solver relies on brute-force backtracking without heuristics such as forward checking or variable ordering.
+* Input is hardcoded into the script rather than being read dynamically.
+* Only one solution is returned, even if multiple solutions exist.
+
+---
+
+## Possible Enhancements
+
+* Introduce a user interface (e.g., using Tkinter) for better usability.
+* Improve efficiency with constraint propagation or heuristic-based search.
+* Allow users to input custom boards via file or interactive input.
+* Extend the solver to detect and display multiple valid solutions.
+* Provide more detailed validation feedback.
+
+---
+
+## Summary
+
+Overall, this project illustrates a straightforward implementation of Sudoku validation and solving. While the approach is simple, it effectively highlights how recursive backtracking can be applied to solve structured grid problems.
+
+---
