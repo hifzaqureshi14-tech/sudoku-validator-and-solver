@@ -124,3 +124,11 @@ tk.Button(root, text="Solve", command=solve).grid(row=9, column=3, columnspan=3)
 tk.Button(root, text="Clear", command=clear).grid(row=9, column=6, columnspan=3)
 
 root.mainloop()
+
+
+# buttons
+tk.Button(root, text="Load Example", command=load_example).grid(row=9, column=0, columnspan=3)
+tk.Button(root, text="Solve", command=solve).grid(row=9, column=3, columnspan=3)
+tk.Button(root, text="Clear", command=clear).grid(row=9, column=6, columnspan=3)
+
+root.mainloop()
